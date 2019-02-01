@@ -153,7 +153,7 @@ export default class Chat extends React.Component {
           style={styles.container}
           ref={(ref) => { this.chat = ref; }}
         >
-          <NavigationBar chatTitle={this.props.chatTitle} closeChat={this.closeChat} />
+          {/*<NavigationBar chatTitle={this.props.chatTitle} closeChat={this.closeChat} />*/}
           <Text style={styles.status}>
             { this.state.onlineStatus ? this.props.greeting : this.props.noAgents }
           </Text>
