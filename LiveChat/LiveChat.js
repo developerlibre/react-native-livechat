@@ -14,7 +14,7 @@ export default class LiveChat extends Component {
     super(props);
     this.defineStyles();
     this.state = {
-      isChatOn: false,
+      isChatOn: props.autoOpen,
       bubble: props.bubble ? props.bubble : (
         <View style={this.styles.bubbleStyle}>
           <Image source={chatIcon} style={this.styles.icon} />
@@ -85,6 +85,7 @@ LiveChat.propTypes = {
   greeting: PropTypes.string,
   noAgents: PropTypes.string,
   onLoaded: PropTypes.func,
+  autoOpen: PropTypes.bool,
 };
 
 LiveChat.defaultProps = {
@@ -96,4 +97,5 @@ LiveChat.defaultProps = {
   chatTitle: 'Chat with us!',
   greeting: 'Welcome to our LiveChat!\nHow may We help you?',
   noAgents: 'Our agents are not available right now.',
+  autoOpen: false,
 };
