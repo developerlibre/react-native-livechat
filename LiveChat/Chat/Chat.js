@@ -24,6 +24,7 @@ export default class Chat extends React.Component {
       },
     };
     GLOBAL.visitorSDK.on('new_message', this.handleNewMessage.bind(this));
+    GLOBAL.visitorSDK.on('new_file', this.handleNewFile.bind(this));
     GLOBAL.visitorSDK.on('agent_changed', this.handleAgentChanged.bind(this));
     GLOBAL.visitorSDK.on('status_changed', this.handleStateChange.bind(this));
     GLOBAL.visitorSDK.on('typing_indicator', this.handleTypingIndicator.bind(this));
@@ -42,6 +43,19 @@ export default class Chat extends React.Component {
 
   handleNewMessage = (newMessage) => {
     this.addMessage(newMessage);
+  };
+
+  handleNewFile = (newFile) => {
+    if (newFile.contentType.indexOf('image') >= 0) {
+      this.setState({
+        messages: [{
+          _id: newFile.id,
+          createdAt: newFile.timestamp,
+          user: this.state.users[newFile.authorId],
+          image: newFile.url,
+        }, ...this.state.messages],
+      });
+    }
   };
 
   addMessage = (message) => {
